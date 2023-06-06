@@ -1,0 +1,13 @@
+.loginform
+{
+    background-color: #ffffffff;
+    width: 20%;
+    opacity: 0.85;
+    border-radius: 25px;
+    padding: 18px 7px;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
