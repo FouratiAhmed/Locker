@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+        body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      margin: 0;
+    }
+    .locker {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .box {
+      width: 150px;
+      height: 150px;
+      background-color: #ffffff;
+      border: 2px solid #999999;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+    }
+    
+    .box.empty {
+      background-color: #003087;
+      border-color: #d9d9d9;
+      color: #ffffff;
+    }
+    
+    .button {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      bottom: 5px;
+      right: 5px;
+      /* opacity: 0; */
+      /* transition: opacity 0.3s ease-in-out; */
+    }
+
+    .box.empty:hover .button {
+      opacity: 1;
+    }
+    
+    .box.full {
+      background-color: #ffd200;
+      border-color: #d9a700;
+      color: #ffffff;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="locker">
+    <div class="box empty">
+      <div>Empty</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box empty">
+      <div>Empty</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box empty">
+      <div>Empty</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box full">
+      <!-- Box with content -->
+      <div>Full</div>
+    </div>
+    <div class="box full">
+      <!-- Box with content -->
+      <div>Full</div>
+    </div>
+    <div class="box empty">
+      <div>Empty</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box empty">
+      <div>Empty</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box empty">
+      <div>Empty</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box empty">
+      <div>Empty</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box full">
+      <!-- Box with content -->
+      <div>Full</div>
+    </div>
+    <div class="box full">
+      <!-- Box with content -->
+      <div>Full</div>
+    </div>
+    <div class="box empty">
+      <div>Empty</div>
+      <div class="button">Open</div>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock content %}

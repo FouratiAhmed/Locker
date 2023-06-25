@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+.pin-pad {
+  /* display: inline-block; */
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+button {
+  display: block;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.number {
+  background-color: #f0f1f3;
+  color: #333;
+}
+
+.clear {
+  background-color: #f9a61a;
+  color: #fff;
+}
+
+.submit {
+  background-color: #0392cf;
+  color: #fff;
+}
+</style>
+    <div class="content-section">
+        <form>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Enter Your PIN Code in order to login</legend>
+                <div class="pin-pad">
+                    {{ form.lognum(class="form-control form-control-lg") }}
+                    <table>
+                      <tr>
+                        <td><button class="number">1</button></td>
+                        <td><button class="number">2</button></td>
+                        <td><button class="number">3</button></td>
+                      </tr>
+                      <tr>
+                        <td><button class="number">4</button></td>
+                        <td><button class="number">5</button></td>
+                        <td><button class="number">6</button></td>
+                      </tr>
+                      <tr>
+                        <td><button class="number">7</button></td>
+                        <td><button class="number">8</button></td>
+                        <td><button class="number">9</button></td>
+                      </tr>
+                      <tr>
+                        <td><button class="clear">C</button></td>
+                        <td><button class="number">0</button></td>
+                        <td><button class="submit">OK</button></td>
+                        <td><button>{{ form.submit(class="btn btn-outline-info") }}</button></td>
+                      </tr>
+                    </table>
+                    <div> 
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                    <div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                          {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                              {{ message }}
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                      {% endwith %}
+                    </div>
+                  </div>
+                </fieldset>
+        </form>
+    </div>
+{% endblock content %}
+
+
+
+    hey, so I'm working on a project, it's about a pickup station where customer get their orders delivered, I worked on everything, one last thing is I need a screen, 
+    to thank the user for using this server and telling him to take the delivery, suggest some html css design, inspired from la poste colours and theme

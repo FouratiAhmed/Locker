@@ -10,13 +10,26 @@ def load_user(user_id):
 class User(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
+    address = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+        return f"User('{self.username}', '{self.email}', '{self.image_file},'{self.address}')"
+
+class User2(db.Model,UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    surname = db.Column(db.String(20), unique=True, nullable=False)
+    mail_address = db.Column(db.String(120), unique=True, nullable=False)
+    p_p = db.Column(db.String(20), nullable=False, default='default.jpg')
+    password = db.Column(db.String(60), nullable=False)
+    has_moto = db.Column(db.Boolean, default=False)
+    has_car = db.Column(db.Boolean, default=False)
+    def __repr__(self):
+        return f"User('{self.surname}', '{self.mail_address}', '{self.p_p}', '{self.has_moto}', '{self.has_car}')"
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)

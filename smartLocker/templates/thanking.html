@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Thank You for Using Our Pickup Station!</title>
+	<style>
+		body {
+			background-color: #FFD100; /* La Poste yellow */
+			opacity: 0.85;
+			font-family: Arial, sans-serif;
+			text-align: center;
+			padding-top: 10px;
+		}
+	
+		.container {
+			background-color: #FFFFFF; /* white background */
+			padding: 10px; /* Reduced padding from 20px to 10px */
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+			display: inline-block;
+			margin-top: 30px; /* Reduced margin from 50px to 30px */
+		}
+	
+		.container1 {
+			background-color: #FFFFFF; /* white background */
+			padding: 10px; /* Reduced padding from 20px to 10px */
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+			display: inline-block;
+			margin-top: 30px; /* Reduced margin from 50px to 30px */
+		}
+	
+		h1 {
+			color: #003087; /* La Poste blue */
+			font-size: 36px;
+			margin-bottom: 10px; /* Reduced margin from 20px to 10px */
+		}
+	
+		p {
+			color: #000000;
+			font-size: 24px;
+			margin-bottom: 10px; /* Reduced margin from 20px to 10px */
+		}
+	
+		button {
+			background-color: #003087;
+			color: #FFFFFF;
+			font-size: 24px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	
+		/* button:hover {
+			background-color: #FFFFFF;
+			color: #003087;
+			border: 2px solid #003087;
+		} */
+	
+		.center-image {
+			background-color: #FFFFFF;
+			padding: 10px; /* Reduced padding from 20px to 10px */
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+			display: inline-block;
+			margin-top: 30px; /* Reduced margin from 50px to 30px */
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Thank You!</h1>
+		<p>For using our pickup station. Your order is ready for pickup.</p>
+		<button>Take Your Delivery</button>
+	</div>
+    <br>
+    <div class="center-image">
+        <img src="{{url_for('static', filename='background/e3d27d533e628ad54538b0ec616b05cc.gif')}}" width="500" height="330" >
+        </div>
+        <br>
+    <div class="container1">
+        <p>Don't forget to close the locker!</p>
+        <p>Thank you for using our service. See you soon!</p>
+      </div>
+</body>
+</html>

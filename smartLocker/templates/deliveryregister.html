@@ -6,29 +6,29 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Today</legend>
                 <div class="form-group">
-                    {{ form.username.label(class="form-control-label") }}
-                    {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    {{ form.surname.label(class="form-control-label") }}
+                    {% if form.surname.errors %}
+                        {{ form.surname(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.username.errors %}
+                            {% for error in form.surname.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.username(class="form-control form-control-lg") }}
+                        {{ form.surname(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    {{ form.mail_address.label(class="form-control-label") }}
+                    {% if form.mail_address.errors %}
+                        {{ form.mail_address(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
+                            {% for error in form.mail_address.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
+                        {{ form.mail_address(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
@@ -57,9 +57,13 @@
                         {{ form.confirm_password(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-                <div>
-                    {{ form.address.label(class="form-control-label") }}
-                    {{ form.address(class="form-control form-control-lg") }}
+                <div class="form-group">
+                    {{ form.has_moto.label(class="form-control-label") }}
+                    {{ form.has_moto(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                    {{ form.has_car.label(class="form-control-label") }}
+                    {{ form.has_car(class="form-control form-control-lg") }}
                 </div>
             </fieldset>
             <div class="form-group">

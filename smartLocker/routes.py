@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, abort
 from smartLocker import app, db, bcrypt
-from smartLocker.forms import registrationForm, LoginForm, UpdateAccountForm, PostForm
-from smartLocker.models import User, Post
+from smartLocker.forms import registrationForm, LoginForm, UpdateAccountForm, PostForm, typeChoiceForm, registrationDeliveryForm, PinPadForm
+from smartLocker.models import User, Post, User2
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
 import os
@@ -17,6 +17,28 @@ def home():
 @app.route("/about")
 def about():
     return render_template("about.html",title='About')
+@app.route("/type_choice", methods= ['GET', 'POST'])
+def type_choice():
+    form = typeChoiceForm()
+    if form.validate_on_submit():
+        if form.customer.data:
+            return redirect(url_for('register'))
+        if form.delivery.data:
+           return redirect(url_for('deliveryregister')) 
+    return render_template('type_choice.html',title='Type Choice',form=form)
+
+@app.route("/delivery_registration", methods= ['GET', 'POST'])
+def deliveryregister():
+    form = registrationDeliveryForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user2 = User2(surname=form.surname.data, mail_address=form.mail_address.data, password=hashed_password, has_moto=form.has_moto.data, has_car=form.has_car.data)
+        db.session.add(user2)
+        db.session.commit()
+        flash("Account Created for {0}, you can login now".format(form.surname.data),"success") # we can do the verification link to the email
+        return redirect(url_for('login'))
+    return render_template('deliveryregister.html',title='Delivery Registration',form=form)
+
 @app.route("/registration", methods= ['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -24,12 +46,13 @@ def register():
     form = registrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password, address=form.address.data)
         db.session.add(user)
         db.session.commit()
         flash("Account Created for {0}, you can login now".format(form.username.data),"success") # we can do the verification link to the email
         return redirect(url_for('login'))
     return render_template('register.html',title='Registration',form=form)
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -37,13 +60,39 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
+        user2 = User2.query.filter_by(mail_address=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            return redirect(next_page) if next_page else redirect(url_for('client_view'))
+        elif user2 and bcrypt.check_password_hash(user2.password, form.password.data):
+            login_user(user2, remember=form.remember.data)
+            next_page = request.args.get('next')
+            return redirect(url_for('delivery_view'))
         else:
-            flash('Login Unsuccessful. Please check email and password, if you forgot your password check link below', 'danger')
+            flash('Login Unsuccessful! please verify your credentials', 'danger')
     return render_template('new_login.html', title='Login', form=form)
+
+@app.route("/client_view", methods= ['GET', 'POST'])
+def client():
+    form = PinPadForm()
+    ref_pin = "1234"
+    if form.validate_on_submit():
+        if form.lognum.data == ref_pin:
+            flash('You May Take Your delivery', 'success')
+            return redirect(url_for('thanking'))
+        else:
+            flash('Login Unsuccessful! please verify your credentials', 'danger')
+            return redirect(url_for('client'))
+    return render_template('client_view.html',title='Type Choice',form=form)
+@app.route("/thanking", methods= ['GET', 'POST'])
+def thanking():
+    return render_template('thanking.html',title='Thanking')
+
+@app.route("/delivery_view")
+def delivery_view():
+    return render_template('delivery_view.html',title='Delivery Page')
+
 @app.route("/logout")
 def logout():
     logout_user()

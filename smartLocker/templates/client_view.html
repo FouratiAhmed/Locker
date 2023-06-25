@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    .pin-pad {
+      /* display: inline-block; */
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fff;
+      font-family: Arial, sans-serif;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    table {
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+    
+    button {
+      display: block;
+      width: 60px;
+      height: 60px;
+      font-size: 20px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      margin: 5px;
+    }
+    
+    .number {
+      background-color: #f0f1f3;
+      color: #333;
+    }
+    
+    .clear {
+      background-color: #f9a61a;
+      color: #fff;
+    }
+    
+    .submit {
+      background-color: #0392cf;
+      color: #fff;
+      display: block;
+      width: 60px;
+      height: 60px;
+      font-size: 20px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      margin: 5px;
+    }
+    </style>
+
+    <div class="content-section">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Enter Your PIN Code in order to login</legend>
+                <table>
+                    {{ form.lognum.label(class="form-control-label") }}
+                    {{ form.lognum(class="form-control form-control-lg") }}
+                    <tr>
+                      <td><button class="number">1</button></td>
+                      <td><button class="number">2</button></td>
+                      <td><button class="number">3</button></td>
+                    </tr>
+                    <tr>
+                      <td><button class="number">4</button></td>
+                      <td><button class="number">5</button></td>
+                      <td><button class="number">6</button></td>
+                    </tr>
+                    <tr>
+                      <td><button class="number">7</button></td>
+                      <td><button class="number">8</button></td>
+                      <td><button class="number">9</button></td>
+                    </tr>
+                    <tr>
+                      <td><button class="clear">C</button></td>
+                      <td><button class="number">0</button></td>
+                      <td>{{ form.open(class="submit") }}</td>
+                    </tr>
+                  </table>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+            </fieldset>
+            <div class="form-group">
+            </div>
+        </form>
+        <script>
+          $(document).ready(function() {
+            // Handle button clicks
+            $(".number").click(function() {
+              var number = $(this).text(); // Get the clicked number
+              var currentValue = $("#lognum").val(); // Get the current value of the lognum field
+              $("#lognum").val(currentValue + number); // Append the clicked number to the current value
+            });
+          
+            $(".clear").click(function() {
+              $("#lognum").val(""); // Clear the lognum field
+            });
+          });
+          </script>
+    </div>
+{% endblock content %}
+
