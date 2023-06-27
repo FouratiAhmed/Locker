@@ -1,14 +1,156 @@
+{% extends "layout.html" %}
+{% block content %}
+
 <!DOCTYPE html>
 <html>
 <head>
- <title></title>
- <meta charset="utf-8" />
+  <style>
+        body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      margin: 0;
+    }
+    .locker {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .box {
+      width: 150px;
+      height: 150px;
+      background-color: #ffffff;
+      border: 2px solid #999999;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+    }
+    
+    .box.empty {
+      background-color: #003087;
+      border-color: #d9d9d9;
+      color: #ffffff;
+    }
+    
+    .button {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      bottom: 5px;
+      right: 5px;
+      /* opacity: 0; */
+      /* transition: opacity 0.3s ease-in-out; */
+    }
+
+    .box.empty:hover .button {
+      opacity: 1;
+    }
+    
+    .box.full {
+      background-color: #ffd200;
+      border-color: #d9a700;
+      color: #ffffff;
+    }
+    
+  </style>
 </head>
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
 <body> 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='type_choice/pre-delivery-inspections-modified.png') }}">
+    <body>
+        <div class="locker">
+          <div class="box empty">
+            <div>Empty1</div>
+            <div class="button">Open</div>
+          </div>
+          <div class="box empty">
+            <div>Empty2</div>
+            <div class="button">Open</div>
+          </div>
+          <div id="locker-status">
+            {% if form.locker_status.data %}
+            <div class="box empty">
+              <div>Empty3</div>
+              <div class="button">Open</div>
+            </div>
+            {% else %}
+            <div class="box full">
+              <!-- Box with content -->
+              <div>Full3</div>
+            </div>
+            {% endif %}
+          </div>
+          <div class="box full">
+            <!-- Box with content -->
+            <div>Full4</div>
+          </div>
+          <div class="box empty">
+            <div>Empty5</div>
+            <div class="button">Open</div>
+          </div>
+          <div class="box full">
+            <!-- Box with content -->
+            <div>Full10</div>
+          </div>
+          <div class="box empty">
+            <div>Empty6</div>
+            <div class="button">Open</div>
+          </div>
+          <div class="box empty">
+            <div>Empty7</div>
+            <div class="button">Open</div>
+          </div>
+          <div class="box empty">
+            <div>Empty8</div>
+            <!-- <div class="button">Open</div> -->
+                  {{ form.about(class="button") }}
+          </div>
+          <div class="box full">
+            <!-- Box with content -->
+            <div>Full9</div>
+          </div>
+          <div class="box full">
+            <!-- Box with content -->
+            <div>Full10</div>
+          </div>
+          <div class="box empty">
+            <div>Empty11</div>
+            <div class="button">Open</div>
+          </div>
+        </div>
+      </body>
+       <!-- <script>
+            setInterval(function() {
+              location.reload();
+            }, 500);
+          </script> -->
+        </form>
+      </html>
 <div class="bd-example">
- 
-<img src="{{url_for('static', filename='nav-bar/Flag_of_Tunisia.png')}}">
-        
+<div class="form-group">
+    {{ form.about(class="btn btn-outline-info") }}
+</div> 
 </div>
 </body>
-</html>
+</form>
+</div>
+{% endblock content %}

@@ -73,54 +73,70 @@
 <body>
   <div class="locker">
     <div class="box empty">
-      <div>Empty</div>
+      <div>Empty1</div>
       <div class="button">Open</div>
     </div>
     <div class="box empty">
-      <div>Empty</div>
+      <div>Empty2</div>
       <div class="button">Open</div>
     </div>
+    <div id="locker-status">
+      {% if form.locker_status.data %}
+      <div class="box empty">
+        <div>Empty3</div>
+        <div class="button">Open</div>
+      </div>
+      {% else %}
+      <div class="box full">
+        <!-- Box with content -->
+        <div>Full3</div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="box full">
+      <!-- Box with content -->
+      <div>Full4</div>
+    </div>
     <div class="box empty">
-      <div>Empty</div>
+      <div>Empty5</div>
       <div class="button">Open</div>
     </div>
     <div class="box full">
       <!-- Box with content -->
-      <div>Full</div>
+      <div>Full10</div>
+    </div>
+    <div class="box empty">
+      <div>Empty6</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box empty">
+      <div>Empty7</div>
+      <div class="button">Open</div>
+    </div>
+    <div class="box empty">
+      <div>Empty8</div>
+      <!-- <div class="button">Open</div> -->
+            {{ form.submit(class="button") }}
     </div>
     <div class="box full">
       <!-- Box with content -->
-      <div>Full</div>
-    </div>
-    <div class="box empty">
-      <div>Empty</div>
-      <div class="button">Open</div>
-    </div>
-    <div class="box empty">
-      <div>Empty</div>
-      <div class="button">Open</div>
-    </div>
-    <div class="box empty">
-      <div>Empty</div>
-      <div class="button">Open</div>
-    </div>
-    <div class="box empty">
-      <div>Empty</div>
-      <div class="button">Open</div>
+      <div>Full9</div>
     </div>
     <div class="box full">
       <!-- Box with content -->
-      <div>Full</div>
-    </div>
-    <div class="box full">
-      <!-- Box with content -->
-      <div>Full</div>
+      <div>Full10</div>
     </div>
     <div class="box empty">
-      <div>Empty</div>
+      <div>Empty11</div>
       <div class="button">Open</div>
     </div>
   </div>
 </body>
+ <!-- <script>
+      setInterval(function() {
+        location.reload();
+      }, 500);
+    </script> -->
+  </form>
 </html>
 {% endblock content %}

@@ -1,11 +1,13 @@
 from flask import render_template, url_for, flash, redirect, request, abort
 from smartLocker import app, db, bcrypt
-from smartLocker.forms import registrationForm, LoginForm, UpdateAccountForm, PostForm, typeChoiceForm, registrationDeliveryForm, PinPadForm
+from smartLocker.forms import registrationForm, LoginForm, UpdateAccountForm, PostForm, typeChoiceForm, registrationDeliveryForm, PinPadForm, LockerForm
 from smartLocker.models import User, Post, User2
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
 import os
 from PIL import Image
+import RPi.GPIO as GPIO 
+from time import sleep
 
 @app.route("/")
 @app.route("/home")
@@ -14,9 +16,9 @@ def home():
     posts = Post.query.paginate(page=page, per_page=5)
     return render_template("home.html",posts=posts)
 
-@app.route("/about")
-def about():
-    return render_template("about.html",title='About')
+# @app.route("/about")
+# def about():
+#     return render_template("about.html",title='About')
 @app.route("/type_choice", methods= ['GET', 'POST'])
 def type_choice():
     form = typeChoiceForm()
@@ -75,10 +77,17 @@ def login():
 
 @app.route("/client_view", methods= ['GET', 'POST'])
 def client():
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(18, GPIO.OUT)
     form = PinPadForm()
     ref_pin = "1234"
     if form.validate_on_submit():
         if form.lognum.data == ref_pin:
+            GPIO.output(18,1)
+            sleep(2)
+            # GPIO.output(18,0)
+            # sleep(2)
             flash('You May Take Your delivery', 'success')
             return redirect(url_for('thanking'))
         else:
@@ -87,11 +96,30 @@ def client():
     return render_template('client_view.html',title='Type Choice',form=form)
 @app.route("/thanking", methods= ['GET', 'POST'])
 def thanking():
+    GPIO.output(18,0)
     return render_template('thanking.html',title='Thanking')
 
-@app.route("/delivery_view")
-def delivery_view():
-    return render_template('delivery_view.html',title='Delivery Page')
+@app.route("/about", methods= ['GET', 'POST'])
+def about():
+    form = LockerForm()
+    GPIO.setwarnings(False)
+    pin = 25
+    relay = 18
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(pin, GPIO.IN)
+    GPIO.setup(relay, GPIO.OUT)
+    sensor=GPIO.input(pin)
+    if form.validate_on_submit():
+        GPIO.output(relay,1)
+        sleep(2)
+        GPIO.output(relay,0)
+        sleep(2)
+        # return redirect(url_for('login'))
+    if (sensor==1):
+        form.locker_status.data = True
+    elif (sensor==0):
+        form.locker_status.data = False
+    return render_template("about.html",title='About', form=form)
 
 @app.route("/logout")
 def logout():

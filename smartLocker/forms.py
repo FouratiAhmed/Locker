@@ -49,6 +49,10 @@ class PinPadForm(FlaskForm):
     lognum = StringField ('Password', validators = [DataRequired(),Length(min=4,max=4)])
     open = SubmitField ('Open')
 
+class LockerForm(FlaskForm):
+    locker_status = BooleanField ('locker status')
+    about = SubmitField ('Fill')
+
 class LoginForm(FlaskForm):
     email = StringField('Email', validators = [DataRequired(),Email()])
     password = PasswordField ('Password', validators = [DataRequired(),Length(min=2,max=20)])
